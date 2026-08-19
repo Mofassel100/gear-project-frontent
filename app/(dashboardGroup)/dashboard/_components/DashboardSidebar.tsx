@@ -16,6 +16,7 @@ import { ISidebarItem, NavbarProps } from "@/lib/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { sidebarMenuItems } from "../_config/sidebarMenuItems";
+import { getMe } from "@/service/getMe";
 
 
 // const navItems = [
@@ -45,7 +46,7 @@ export default function DashboardSidebar({user} : NavbarProps) {
   }else if (user?.data?.role === "Admin") {
      navItems = sidebarMenuItems.Admin;
   }
-console.log(navItems)
+
   
   return (
     <Sidebar
@@ -65,11 +66,13 @@ console.log(navItems)
           </div>
         </div>
       </SidebarHeader> */}
+    
+
 
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu >
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.href}>
                   <SidebarMenuButton

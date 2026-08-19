@@ -9,7 +9,7 @@ export interface TUser {
   password: string;
   address?: string;
   city?: string;
-  role?: "CUSTOMER" | "PROVIDER" | "ADMIN";
+  role?: "Customer" | "Provider" | "Admin";
 }
 export interface IUserStatus {
   status?: "ACTIVE" | "SUSPENDED";
@@ -43,3 +43,58 @@ export type ISidebarItem = {
     Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
   >;
 };
+
+export interface IRentalOrder {
+  orderNumber: string;
+  id?: string;
+  customerId: string;
+  gearItemId: string;
+
+  rentalStartDate?: Date;
+  rentalEndDate?: Date;
+
+  pickupMethod?: "SELF_PICKUP" | "HOME_DELIVERY";
+
+  subtotal: number;
+  deliveryFee: number;
+  totalAmount: number;
+
+  paymentStatus: "PENDING" | "PAID" | "FAILED" | "REFUNDED";
+  orderStatus:
+    | "PENDING"
+    | "CONFIRMED"
+    | "RETURNED"
+    | "READY_FOR_PICKUP"
+    | "OUT_FOR_DELIVERY"
+    | "COMPLETED"
+    | "CANCELLED";
+
+  createdAt: Date;
+  updatedAt: Date;
+}
+export interface ICategory {
+  id: string;
+  name: string;
+  category?: string;
+  status?: string;
+  sortOrder?: number;
+  totalGearItems?: number;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface IUserSingle {
+  id: string;
+  name: string;
+  email: string;
+  status: string;
+  role: "Admin" | "Customer" | "Provider";
+  createdAt: string;
+  updatedAt: string;
+  phone: number;
+  password: string;
+  address: string;
+  city: string;
+  country: string;
+}

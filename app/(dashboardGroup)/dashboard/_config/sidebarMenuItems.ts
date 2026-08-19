@@ -11,7 +11,7 @@ const CUSTOMER_SIDEBAR_ITEMS: ISidebarItem[] = [
   },
   {
     label: "My Orders",
-    href: "/customer/my-order",
+    href: "/customer/create-rentals",
     icon: ListOrdered,
   },
 ];

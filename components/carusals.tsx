@@ -1,0 +1,124 @@
+"use client"
+
+import * as React from "react"
+import Image from "next/image"
+
+export interface Artwork {
+  artist: string
+  art: string
+}
+
+export const works: Artwork[] = [
+  {
+    artist: "Types of Gears",
+    art: "/gears/gear4.png",
+  },
+  {
+    artist: "Gear Assembly",
+    art: "/gears/gear2.png",
+  },
+  {
+    artist: "Steampunk Gear",
+    art: "/gears/gear3.png",
+  },
+  {
+    artist: "Gear Drive",
+    art: "/gears/gear4.jpg",
+  },
+]
+
+// Duplicate the list so the track can loop seamlessly.
+const infiniteWorks = [...works, ...works]
+
+export function ScrollAreaHorizontalDemo() {
+  const scrollRef = React.useRef<HTMLDivElement>(null)
+
+  React.useEffect(() => {
+    const container = scrollRef.current
+    if (!container) return
+
+    // Respect users who prefer reduced motion — no auto-scroll for them.
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (prefersReduced) return
+
+    let animationId: number
+    let paused = false
+    let resumeTimer: ReturnType<typeof setTimeout>
+
+    const pause = () => {
+      paused = true
+    }
+    const resume = () => {
+      paused = false
+    }
+    // On touch devices there is no hover, so pause while the user is
+    // swiping and resume a moment after they let go.
+    const pauseThenResume = () => {
+      paused = true
+      clearTimeout(resumeTimer)
+      resumeTimer = setTimeout(() => {
+        paused = false
+      }, 2000)
+    }
+
+    container.addEventListener("pointerenter", pause)
+    container.addEventListener("pointerleave", resume)
+    container.addEventListener("touchstart", pause, { passive: true })
+    container.addEventListener("touchend", pauseThenResume, { passive: true })
+
+    const scroll = () => {
+      if (!paused) {
+        // The track holds two copies of `works`. Once we've scrolled past
+        // the first copy, subtract that width to loop without a visible jump.
+        const halfway = container.scrollWidth / 2
+        if (container.scrollLeft >= halfway) {
+          container.scrollLeft -= halfway
+        }
+        container.scrollLeft += 0.5
+      }
+      animationId = requestAnimationFrame(scroll)
+    }
+
+    animationId = requestAnimationFrame(scroll)
+
+    return () => {
+      cancelAnimationFrame(animationId)
+      clearTimeout(resumeTimer)
+      container.removeEventListener("pointerenter", pause)
+      container.removeEventListener("pointerleave", resume)
+      container.removeEventListener("touchstart", pause)
+      container.removeEventListener("touchend", pauseThenResume)
+    }
+  }, [])
+
+  return (
+    <div className="w-full">
+      <div
+        ref={scrollRef}
+        className="flex w-full gap-3 overflow-x-auto px-3 py-4 sm:gap-4 sm:px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {infiniteWorks.map((artwork, index) => (
+          <figure
+            key={`${artwork.artist}-${index}`}
+            className="group w-[75vw] shrink-0 sm:w-[45vw] md:w-[30vw] lg:w-[24vw] xl:w-[20vw]"
+          >
+            <div className="overflow-hidden rounded-lg">
+              <Image
+                src={artwork.art || "/placeholder.svg"}
+                alt={`${artwork.artist} gear illustration`}
+                width={600}
+                height={800}
+                sizes="(max-width: 640px) 75vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, (max-width: 1280px) 24vw, 20vw"
+                className="aspect-[3/4] w-full bg-muted object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+
+            <figcaption className="pt-2 text-xs text-muted-foreground sm:text-sm">
+              <span className="font-semibold text-foreground">{artwork.artist}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  )
+}
