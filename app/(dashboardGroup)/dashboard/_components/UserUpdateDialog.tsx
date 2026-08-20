@@ -2,12 +2,9 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { IRentalOrder, IUserSingle } from "@/lib/types";
+import {  IUserSingle } from "@/lib/types";
 import {
   Select,
   SelectContent,
@@ -15,10 +12,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { PencilIcon, PlusIcon } from "lucide-react";
+import { PencilIcon } from "lucide-react";
 import { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { createRental, updateRental } from "../_action/action";
 import { updateUser } from "../_action/userUpdated";
 import { useRouter } from "next/navigation"
 

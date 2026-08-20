@@ -1,3 +1,4 @@
+import Link from "next/link";
 import LoginForm from "../_components/loginForm";
 
 export default function LoginPage() {
@@ -5,6 +6,7 @@ export default function LoginPage() {
   return (
     <>
       <div className="flex min-h-screen items-center justify-center">
+        <div className="items-center justify-center p-3">
         <div className="w-full max-w-md space-y-6 rounded-lg border p-8 shadow-lg">
 
           {/* FORM GENERIC TEXTS */}
@@ -19,7 +21,12 @@ export default function LoginPage() {
           <LoginForm/>
 
         </div>
+           <div>
+          <span>Are you new user ? Please</span><Link className="p-2 bg-red-800 text-white" href={"/registration"}>Registration</Link>
       </div>
+        </div>   
+      </div>
+      
     </>
   );
 }
