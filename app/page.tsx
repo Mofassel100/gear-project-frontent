@@ -8,6 +8,7 @@ import CategoryPage from "./(public)/_component/gears/category";
 import GearPage from "./(public)/_component/gear/gear";
 import { CardFooter } from "@/components/ui/card";
 import { SiteFooter } from "@/components/shared/footer";
+import { getGear } from "./(public)/_action/gear";
 
 
 
@@ -19,7 +20,7 @@ import { SiteFooter } from "@/components/shared/footer";
 export default async function  Home() {
    const user = await getMe();
   
- 
+ const gear =await getGear()
 
   return (
     
@@ -32,7 +33,7 @@ export default async function  Home() {
 <CategoryPage></CategoryPage>
 
 <div className="justify-center text-center p-2 m-1 text-4xl">All gears</div>
-<GearPage></GearPage>
+<GearPage ></GearPage>
 
     
     </div>

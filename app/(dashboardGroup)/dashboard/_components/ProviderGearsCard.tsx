@@ -1,3 +1,5 @@
+
+
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -8,24 +10,27 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { ICategory } from "@/lib/types"
+import { ICategory, IGearItem } from "@/lib/types";
+
 import Link from "next/link";
+import { GearFormDialogDB } from "./GearDialog";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-interface CardImageProps {
-  props: ICategory;
+interface CardImageGearsProps {
+  props: IGearItem;
 }
-export default function CardImage({props}: CardImageProps) {
-  console.log(props)
+export default function ProviderCardGearImage({props}: CardImageGearsProps) {
+  
+  
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
       <img
-        src="/gears/gear1.jpg"
+        src="/gears/gear4.jpg"
       />
       <CardHeader>
         <CardAction>
-          <Badge variant="secondary">{props.status}</Badge>
+          <Badge variant="secondary">{props.brand}</Badge>
         </CardAction>
         <CardTitle>{props.name}</CardTitle>
         <CardDescription>
@@ -33,7 +38,7 @@ export default function CardImage({props}: CardImageProps) {
         </CardDescription>
       </CardHeader>
       <CardFooter className="w-full justify-center items-center" >
-       <Link  href={"/gear"}>  <Button >Details</Button></Link>
+      <GearFormDialogDB mode="edit" gear={props} key={props.id} ></GearFormDialogDB>
       </CardFooter>
     </Card>
   )

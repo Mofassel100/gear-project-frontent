@@ -17,6 +17,7 @@ export const getMe = async () => {
   }
 
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/me`, {
+    credentials: "include",
     headers: {
       // Authorization : accessToken as unknown as string,
       // Authorization : `${accessToken}`,
@@ -28,7 +29,6 @@ export const getMe = async () => {
     cache: "force-cache",
     next: {
       revalidate: 60 * 60 * 24, // 1day
-      tags: ["my-profile"],
     },
   });
 

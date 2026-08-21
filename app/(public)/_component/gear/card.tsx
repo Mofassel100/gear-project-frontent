@@ -1,3 +1,4 @@
+import RentalCreated from "@/app/(dashboardGroup)/dashboard/_components/RentalCreate";
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -8,13 +9,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { ICategory } from "@/lib/types"
+import { ICategory, IGearItem } from "@/lib/types"
+import Link from "next/link";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface CardImageGearsProps {
-  props: ICategory;
+  props: IGearItem;
 }
 export default function CardGearImage({props}: CardImageGearsProps) {
+  
   console.log(props)
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
@@ -31,8 +34,8 @@ export default function CardGearImage({props}: CardImageGearsProps) {
          
         </CardDescription>
       </CardHeader>
-      <CardFooter>
-        <Button className="w-full">Details</Button>
+      <CardFooter className="w-full justify-center items-center" >
+       <Link href={`/${"dashboard/customer/create-rentals"}`}> <Button className="w-full"></Button></Link>
       </CardFooter>
     </Card>
   )

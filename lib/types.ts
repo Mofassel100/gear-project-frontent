@@ -1,6 +1,28 @@
 import { LucideProps } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
+enum OrderStatus {
+  PENDING,
+  CONFIRMED,
+  PROCESSING,
+  RETURNED,
+  READY_FOR_PICKUP,
+  OUT_FOR_DELIVERY,
+  COMPLETED,
+  CANCELLED,
+}
+
+enum PaymentStatus {
+  PENDING,
+  PAID,
+  FAILED,
+  REFUNDED,
+}
+
+enum PickupMethod {
+  SELF_PICKUP,
+  HOME_DELIVERY,
+}
 export type IGearStatus = "PENDING" | "APPROVED" | "REJECTED";
 export interface TUser {
   name: string;
@@ -98,3 +120,68 @@ export interface IUserSingle {
   city: string;
   country: string;
 }
+
+export interface IRentalOrderUpdated {
+  orderNumber?: string;
+  customerId?: string;
+  gearItemId?: string;
+
+  rentalStartDate?: Date;
+  rentalEndDate?: Date;
+
+  pickupMethod?: PickupMethod;
+
+  subtotal?: number;
+  deliveryFee?: number;
+  totalAmount?: number;
+
+  paymentStatus?: PaymentStatus;
+  orderStatus?: OrderStatus;
+}
+
+enum SportType {
+  FOOTBALL,
+  CRICKET,
+  TENNIS,
+}
+
+enum GearCondition {
+  NEW,
+  EXCELLENT,
+  GOOD,
+  FAIR,
+}
+
+enum GearStatus {
+  PENDING,
+  APPROVED,
+  REJECTED,
+}
+export interface IGearItem {
+  id: string;
+  name: string;
+  brand: string;
+  model: string;
+  description: string;
+  sportType: SportType;
+  condition: GearCondition;
+
+  stockQuantity?: number;
+  availableQuantity?: number;
+
+  minRentalDays?: number;
+  maxRentalDays?: number;
+
+  status?: GearStatus;
+  isAvailable?: boolean;
+
+  providerId: string;
+  categoryId: string;
+}
+// export interface IGearQuery extends GearItemWhereInput {
+//   searchTerm?: string;
+//   page?: string;
+//   limit?: string;
+//   sortOrder?: string;
+//   sortBy?: string;
+// }

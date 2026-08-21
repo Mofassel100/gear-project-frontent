@@ -16,28 +16,8 @@ type RentaleState = {
   message: string;
   data: Record<string, any>;
 };
-
-/*
-
-    data : {
-        title
-        conten
-    }
-*/
 export  const getGearCategory = async (
 ) => {
-
-//     export interface ICategory {
-//   name: string;
-//   category?: Categoroy;
-//   status?: Status;
-//   sortOrder?: number;
-//   totalGearItems?: number;
-// }
-  
-
-
-
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/categories`);
 
   const result = await res.json();
@@ -55,16 +35,13 @@ export const updateRental = async (
     title: formData.get("title"),
     content: formData.get("content"),
     thumbnail: formData.get("thumbnail"),
-    // tags: (formData.get("tags") as string).split(", "),
-    // isPremium: formData.get("isPremium") === "on",
+    
   });
 
   const payload = {
     title: formData.get("title") ?? "",
     content: formData.get("content") ?? "",
     thumbnail: formData.get("thumbnail") ?? "",
-    // tags: (formData.get("tags") as string).split(", ") ?? "",
-    // isPremium: formData.get("isPremium") === "on",
   };
 
   const accessToken = await  isAccessTokenExist();
@@ -74,10 +51,6 @@ export const updateRental = async (
     {
       method: "PATCH",
       headers: {
-        // Authorization : accessToken as unknown as string,
-        // Authorization : `${accessToken}`,
-        // Authorization : `Bearer ${accessToken}`
-
         Cookie: `accessToken=${accessToken}`,
         "Content-Type": "application/json",
       },
@@ -92,10 +65,6 @@ export const updateRental = async (
       expire: 0,
     });
   }
-
- 
-  
-
   return result;
 };
 
@@ -103,10 +72,7 @@ export const getMyRentals = async () => {
   const cookieStore = await cookies();
 
   const accessToken = cookieStore.get("accessToken")?.value || null;
-
   if (!accessToken) {
-    // throw new Error("User Not Logged In!");
-
     return {
       success: false,
       message: "User not logged in!",
@@ -115,10 +81,6 @@ export const getMyRentals = async () => {
 
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/rentals`, {
     headers: {
-      // Authorization : accessToken as unknown as string,
-      // Authorization : `${accessToken}`,
-      // Authorization : `Bearer ${accessToken}`
-
       Cookie: `accessToken=${accessToken}`,
     },
 
@@ -133,3 +95,4 @@ export const getMyRentals = async () => {
 
   return result;
 };
+

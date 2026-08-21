@@ -6,7 +6,6 @@ import { getGearCategory } from '@/app/(dashboardGroup)/dashboard/_action/gearGe
 
 export default async function CategoryPage() {
  const category =await getGearCategory()
- console.log(category)
   return (
      <div className="w-full overflow-x-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center justify-items-center gap-4 p-4">

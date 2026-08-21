@@ -1,3 +1,5 @@
+
+
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -8,20 +10,22 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { ICategory } from "@/lib/types"
+import { ICategory } from "@/lib/types";
+
 import Link from "next/link";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-interface CardImageProps {
+interface CardImageGearsProps {
   props: ICategory;
 }
-export default function CardImage({props}: CardImageProps) {
+export default function CardGearImage({props}: CardImageGearsProps) {
+  
   console.log(props)
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
       <img
-        src="/gears/gear1.jpg"
+        src="/gears/gear4.jpg"
       />
       <CardHeader>
         <CardAction>
@@ -33,7 +37,7 @@ export default function CardImage({props}: CardImageProps) {
         </CardDescription>
       </CardHeader>
       <CardFooter className="w-full justify-center items-center" >
-       <Link  href={"/gear"}>  <Button >Details</Button></Link>
+       <Link href={`/${"dashboard/customer/create-rentals"}`}> <Button className="w-full"></Button></Link>
       </CardFooter>
     </Card>
   )

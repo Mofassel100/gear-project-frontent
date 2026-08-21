@@ -67,11 +67,11 @@ export async function proxy(request: NextRequest) {
   //user is logged in and trying to access login or register page, redirect to dashboard or root home page
   if (accessToken && AUTH_ROUTES.includes(pathname)) {
     if (userRole === "Customer") {
-      return NextResponse.redirect(new URL("/customer", request.url));
+      return NextResponse.redirect(new URL("/dashboard/customer", request.url));
     } else if (userRole === "Admin") {
-      return NextResponse.redirect(new URL("/admin-dashboard", request.url));
+      return NextResponse.redirect(new URL("/dashboard/admin", request.url));
     } else if (userRole === "Provider") {
-      return NextResponse.redirect(new URL("/provider-dashboard", request.url));
+      return NextResponse.redirect(new URL("/dashboard/provider", request.url));
     } else {
       return NextResponse.redirect(new URL("/", request.url));
     }

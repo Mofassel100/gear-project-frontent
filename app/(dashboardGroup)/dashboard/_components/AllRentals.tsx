@@ -7,15 +7,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { allUserFromDB } from "../_action/allUser"
-import { IUserSingle } from "@/lib/types"
 import { CardAction } from "@/components/ui/card"
-import { UserFormDialog } from "./UserUpdateDialog"
+import { allRentalsFromDB } from "../_action/allRentals"
+import { IRentalOrder } from "@/lib/types"
 
-export async function TableDemo() {
-    const allUser = await allUserFromDB()
+
+export async function RentalTableDemo() {
+    const allRental = await allRentalsFromDB()
     
-    console.log(allUser,"ami table theke bolci")
+    console.log(allRental,"ami table theke bolci")
   return (
     <Table>
       <TableCaption>A list of your recent user.</TableCaption>
@@ -29,15 +29,15 @@ export async function TableDemo() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {allUser?.data?.map((user:IUserSingle) => (
-          <TableRow key={user.id}>
+        {allRental?.data?.map((rentals:IRentalOrder) => (
+          <TableRow key={rentals.id}>
 
-            <TableCell className="font-medium">{user.name}</TableCell>
-            <TableCell>{user.email}</TableCell>
-            <TableCell>{user.status}</TableCell>
-            <TableCell className="text-right"> <CardAction>
+            <TableCell className="font-medium">{rentals.orderNumber}</TableCell>
+            {/* <TableCell>{rentals.rentalStartDate}</TableCell>
+            <TableCell>{rentals.rentalEndDate}</TableCell> */}
+            {/* <TableCell className="text-right"> <CardAction>
                     <UserFormDialog  users={user} />
-                </CardAction></TableCell>
+                </CardAction></TableCell> */}
           </TableRow>
         ))}
       </TableBody>
