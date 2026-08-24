@@ -1,9 +1,11 @@
 import RentalCreated from "@/app/(dashboardGroup)/dashboard/_components/RentalCreate";
+import { RentalFormDialogDB } from "@/app/(dashboardGroup)/dashboard/_components/RentalCreateDialog";
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Card,
   CardAction,
+  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -17,25 +19,25 @@ interface CardImageGearsProps {
   props: IGearItem;
 }
 export default function CardGearImage({props}: CardImageGearsProps) {
-  
-  console.log(props)
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
       <img
-        src="/gears/gear4.jpg"
+        src={props.picture}
       />
-      <CardHeader>
+      <CardHeader className="">
         <CardAction>
           <Badge variant="secondary">{props.status}</Badge>
         </CardAction>
         <CardTitle>{props.name}</CardTitle>
-        <CardDescription>
-         
+        <CardDescription>Price : 
+         {props.price}
         </CardDescription>
+       
+       
       </CardHeader>
       <CardFooter className="w-full justify-center items-center" >
-       <Link href={`/${"dashboard/customer/create-rentals"}`}> <Button className="w-full"></Button></Link>
+        <Button className="w-full"><RentalFormDialogDB mode="create" gear={props}></RentalFormDialogDB></Button>
       </CardFooter>
     </Card>
   )

@@ -78,7 +78,7 @@ const dashboardPath = user?.data?.role
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="shrink-0">
-            <span className="text-2xl font-bold text-primary">Pupolar Gears</span>
+            <span className="text-2xl font-bold text-primary">Popular Gears</span>
           </Link>
 
           {/* Nav Links */}

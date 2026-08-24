@@ -20,6 +20,8 @@ import { useRouter } from "next/navigation"
 import { createGear, updateGear } from "../_action/gearCreate";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { updateRental } from "../_action/action";
+import { createRental } from "../_action/rentalCreate";
 
 
 type GearFormDiallogProps = {
@@ -29,16 +31,21 @@ type GearFormDiallogProps = {
     gear?:IGearItem
 }
 
-export function GearFormDialogDB({ category,user,gear,mode }: GearFormDiallogProps) {
+export function RentalFormDialogDB({ gear,mode }: GearFormDiallogProps) {
 
     const [open, setOpen] = useState(false);
 
     const action =  mode === "edit" && gear
-            ? updateGear.bind(null, gear.id as string)
-            : createGear;
+            ? updateRental.bind(null, gear.id as string)
+            : createRental;
         
-     const router  = useRouter()
+
     const [state, formAction, pending] = useActionState(action, null) as any;
+    
+    const router  = useRouter()
+            
+       
+      
 
     useEffect(() => {
         if (!state) return;
@@ -55,29 +62,6 @@ export function GearFormDialogDB({ category,user,gear,mode }: GearFormDiallogPro
         }
     }, [state]);
 
-    const condition = [
-       {
- level: "NEW",
-        values: "NEW"
-       },
-       {
- level: "EXCELLENT",
-        values: "EXCELLENT"
-       },
-       {
- level: "GOOD",
-        values: "GOOD"
-       },
-       {
- level: "FAIR",
-        values: "FAIR"
-       },
-    ]
-  
-    
-    
-
-
      return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger >
@@ -90,7 +74,7 @@ export function GearFormDialogDB({ category,user,gear,mode }: GearFormDiallogPro
                     ) : (
                         <Button>
                             <PlusIcon data-icon="inline-start" />
-                            Create Gear
+                            Create Rental
                         </Button>
                     )
                 }
@@ -111,74 +95,26 @@ export function GearFormDialogDB({ category,user,gear,mode }: GearFormDiallogPro
   )}
                     <div className="space-y-2">
                         <Label htmlFor="name">Name</Label>
-                        <Input id="name" defaultValue={gear?.name} name="name" placeholder="Enter Gear Name" required />
+                        <Input readOnly id="name" defaultValue={gear?.name} name="name" placeholder="Enter Gear Name" required />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="model">Gear Model</Label>
-                        <Input id="model" defaultValue={gear?.model} name="model" placeholder="Enter Gear Models" required />
+                        <Input readOnly id="model" defaultValue={gear?.model} name="model" placeholder="Enter Gear Models" required />
                     </div>
-                          {
-                            mode === "edit" ? "":<><div  className="space-y-2">
-            <Label htmlFor="categoryId">Gear Category</Label>
-
-  <Select name="categoryId" required>
-  <SelectTrigger id="categoryId" className="w-full">
-    <SelectValue placeholder="Select Condition" />
-  </SelectTrigger>
-
-  <SelectContent>
-    {category?.map((categories) => (
-      <SelectItem
-        key={categories.id}
-        value={categories.id}
-
-      >
-        {categories.name}
-      </SelectItem>
-    ))}
-  </SelectContent>
-</Select>
-          </div>
-
-                       <div className="space-y-2">
-            <Label htmlFor="Condiont">Gear Condition</Label>
-
-  <Select name="condition" required>
-  <SelectTrigger id="condition" className="w-full">
-    <SelectValue  placeholder="Select Condition" />
-  </SelectTrigger>
-
-  <SelectContent>
-    {condition.map((condi) => (
-      <SelectItem
-        key={condi.values}
-        value={condi.values}
-        
-      >
-        {condi.level}
-      </SelectItem>
-    ))}
-  </SelectContent>
-</Select>
-          </div>
-                        </>   }
-         
-                  <div className="space-y-2">
-                        <Label htmlFor="brand">Brand</Label>
-                        <Input defaultValue={gear?.brand} id="brand" name="brand" placeholder="Enter Gear Brand" required />
+                    <div className="space-y-2">
+                        <Label htmlFor="">Gear Brand</Label>
+                        <Input readOnly id="model" defaultValue={gear?.brand}  required />
                     </div>
-                     <div className="space-y-2">
-                        <Label htmlFor="brand">Price</Label>
-                        <Input defaultValue={gear?.price} id="price" type="number" name="price" placeholder="Enter Gear price" required />
+                    <div className="space-y-2">
+                        <Label htmlFor="stockQuantity">Quantity</Label>
+                        <Input name="stockQuantity" placeholder="Enter number" id="stockQuantity" defaultValue={gear?.stockQuantity}  required />
                     </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="picture">Picture</Label>
-                        <Input defaultValue={gear?.picture} id="picture" type="picture" name="picture" placeholder="Enter Gear picture" required />
-                    </div>
+                        
                     <div className="space-y-2">
                         <Label htmlFor="description"> Gear Description</Label>
                         <Textarea
                             id="description"
+                            readOnly
                             defaultValue={gear?.description}
                             name="description"
                             placeholder="Enter Gear details"
@@ -189,7 +125,7 @@ export function GearFormDialogDB({ category,user,gear,mode }: GearFormDiallogPro
 
                     <DialogFooter>
                         <Button type="submit" disabled={pending}>
-                            {pending ? "Saving..." : mode === "edit" ? "Save Changes" : "Create Gear"}
+                            {pending ? "Saving..." : mode === "edit" ? "Save Changes" : "Rental Crate"}
                         </Button>
                     </DialogFooter>
                 </form>

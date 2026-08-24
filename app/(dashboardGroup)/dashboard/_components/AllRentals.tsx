@@ -21,11 +21,10 @@ export async function RentalTableDemo() {
       <TableCaption>A list of your recent user.</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Name</TableHead>
-          <TableHead>Email</TableHead>
+          <TableHead className="w-[100px]">Order Number</TableHead>
           <TableHead>Status</TableHead>
-          <TableHead>Updated Status</TableHead>
-          <TableHead className="text-right">name</TableHead>
+          <TableHead>Total Amount</TableHead>
+          
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -33,6 +32,8 @@ export async function RentalTableDemo() {
           <TableRow key={rentals.id}>
 
             <TableCell className="font-medium">{rentals.orderNumber}</TableCell>
+            <TableCell className="font-medium">{rentals.orderStatus}</TableCell>
+            <TableCell className="font-medium">{rentals.totalAmount}</TableCell>
             {/* <TableCell>{rentals.rentalStartDate}</TableCell>
             <TableCell>{rentals.rentalEndDate}</TableCell> */}
             {/* <TableCell className="text-right"> <CardAction>

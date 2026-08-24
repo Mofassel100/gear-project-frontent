@@ -4,6 +4,7 @@
 import { generateOrderId } from "@/lib/generatedId";
 import { getMe } from "@/service/getMe";
 import { isAccessTokenExist } from "@/service/refreshToken";
+import { revalidatePath } from "next/cache";
 type RentaleState = {
   success: true;
   statusCode: number;
@@ -12,23 +13,29 @@ type RentaleState = {
 };
 
 export const createRental = async (
+  gearId: string,
   prevState: RentaleState,
   formData: FormData,
 ) => {
-  const user = await getMe()
+  const user =await getMe()
   const orderNumber = generateOrderId()
+  console.log(Number(formData.get("stockQuantity")))
+  const stockQuantity = Number(formData.get("stockQuantity"));
   const rentalStartDate = new Date();
+   
 
 const rentalEndDate = new Date(rentalStartDate);
 rentalEndDate.setDate(rentalEndDate.getDate() + 3);
   
   const payload = {
-    orderNumber: orderNumber,
-    customerId:user.data.id ,
-  gearItemId:formData.get("gearItemId"),
+  orderNumber: orderNumber,
+  customerId:user.data.id ,
+  stockQuantity:stockQuantity,
+  gearItemId:gearId,
   rentalStartDate:rentalStartDate,
   rentalEndDate: rentalEndDate
   };
+  console.log(payload)
 
   const accessToken = await isAccessTokenExist()
 
@@ -43,6 +50,9 @@ rentalEndDate.setDate(rentalEndDate.getDate() + 3);
   });
 
   const result = await res.json();
+console.log(result)
+
+  revalidatePath("/dashboard/customer/create-rentals")
   return result;
 };
 

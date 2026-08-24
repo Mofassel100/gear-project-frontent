@@ -161,6 +161,8 @@ export interface IGearItem {
   id: string;
   name: string;
   brand: string;
+  price: number;
+  picture: string;
   model: string;
   description: string;
   sportType: SportType;

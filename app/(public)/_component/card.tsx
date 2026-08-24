@@ -16,7 +16,7 @@ interface CardImageProps {
   props: ICategory;
 }
 export default function CardImage({props}: CardImageProps) {
-  console.log(props)
+  
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />

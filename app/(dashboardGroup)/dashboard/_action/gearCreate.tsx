@@ -4,6 +4,7 @@
 import { cookies } from "next/headers";
 import { isAccessTokenExist } from "@/service/refreshToken";
 import { getMe } from "@/service/getMe";
+import { revalidatePath } from "next/cache";
 type GearState = {
   success: true;
   statusCode: number;
@@ -55,40 +56,51 @@ console.log(payload)
   return result;
 };
 export const updateGear = async (
-  postId: string,
+  gearId: string,
   prevState: GearState,
   formData: FormData,
 ) => {
-  const payload = {
-    title: formData.get("title") ?? "",
-    content: formData.get("content") ?? "",
-    thumbnail: formData.get("thumbnail") ?? "",
-    // tags: (formData.get("tags") as string).split(", ") ?? "",
-    // isPremium: formData.get("isPremium") === "on",
+  console.log(gearId,"gearId", formData.get("gearId"))
+  const payload = {  
+      name:formData.get("name"),
+      brand: formData.get("brand"),
+      model: formData.get("model"),
+      description: formData.get("description"),
+      price: Number(formData.get("price")),
+      picture: formData.get("picture")
   };
-
+console.log(payload)
   const accessToken = await  isAccessTokenExist();
 
   const res = await fetch(
-    `${process.env.BACKEND_API_URL}/api/posts/${postId}`,
+    `${process.env.BACKEND_API_URL}/api/provider/gear/${gearId}`,
+
     {
-      method: "PATCH",
+      credentials:"include",
+      method: "PUT",
       headers: {
-        // Authorization : accessToken as unknown as string,
-        // Authorization : `${accessToken}`,
-        // Authorization : `Bearer ${accessToken}`
+
 
         Cookie: `accessToken=${accessToken}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
+      cache: "no-store",
     },
   );
 
   const result = await res.json();
 
  
-  
+    if (!res.ok) {
+    return {
+      success: false,
+      message: result?.message || "Update failed",
+    };
+  }
+
+  // Change this to your actual page
+  revalidatePath("/dashboard/provider");
 
   return result;
 };

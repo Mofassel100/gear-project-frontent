@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Image from "next/image"
+import Link from "next/link"
 
 export interface Gear {
   name: string
@@ -81,7 +82,7 @@ export function GearCarousel() {
 
   return (
     <div className="w-full">
-      <div
+      <Link href={"/gear"}><div
         ref={scrollRef}
         className="flex w-full gap-3 overflow-x-auto px-3 py-4 sm:gap-4 sm:px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
@@ -106,7 +107,7 @@ export function GearCarousel() {
             </figcaption>
           </figure>
         ))}
-      </div>
+      </div></Link>
     </div>
   )
 }

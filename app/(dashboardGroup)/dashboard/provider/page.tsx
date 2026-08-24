@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { GearFormDialogDB } from "../_components/GearDialog";
-import Gear from "@/app/(public)/gear/page";
 import { getGear } from "@/app/(public)/_action/gear";
 import { getMe } from "@/service/getMe";
 import { getGearCategory } from "../_action/gearGet";
-import CardGearImage from "../_components/GearCard";
 import { IGearItem } from "@/lib/types";
 import ProviderCardGearImage from "../_components/ProviderGearsCard";
 
