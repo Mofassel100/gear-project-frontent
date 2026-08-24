@@ -11,6 +11,7 @@ export default async function ProviderPage() {
   const category = await getGearCategory()
   const userProvider = await getMe()
   const gear = await getGear()
+  console.log(category)
 
   return (
     <div>

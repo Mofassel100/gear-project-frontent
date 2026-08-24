@@ -1,18 +1,18 @@
-import RentalCreated from "@/app/(dashboardGroup)/dashboard/_components/RentalCreate";
+
 import { RentalFormDialogDB } from "@/app/(dashboardGroup)/dashboard/_components/RentalCreateDialog";
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Card,
   CardAction,
-  CardContent,
+ 
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { ICategory, IGearItem } from "@/lib/types"
-import Link from "next/link";
+import {  IGearItem } from "@/lib/types"
+
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface CardImageGearsProps {

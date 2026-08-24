@@ -7,7 +7,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { CardAction } from "@/components/ui/card"
 import { allRentalsFromDB } from "../_action/allRentals"
 import { IRentalOrder } from "@/lib/types"
 

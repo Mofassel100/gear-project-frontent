@@ -5,7 +5,6 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem
@@ -16,7 +15,7 @@ import { ISidebarItem, NavbarProps } from "@/lib/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { sidebarMenuItems } from "../_config/sidebarMenuItems";
-import { getMe } from "@/service/getMe";
+
 
 
 // const navItems = [

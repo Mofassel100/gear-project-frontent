@@ -74,13 +74,7 @@ export const updateRental = async (
   console.log({
     postId,
   });
-  console.log({
-    title: formData.get("title"),
-    content: formData.get("content"),
-    thumbnail: formData.get("thumbnail"),
-    // tags: (formData.get("tags") as string).split(", "),
-    // isPremium: formData.get("isPremium") === "on",
-  });
+  
 
   const payload = {
     title: formData.get("title") ?? "",

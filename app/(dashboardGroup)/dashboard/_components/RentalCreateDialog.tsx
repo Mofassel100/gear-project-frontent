@@ -5,19 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import {  ICategory, IGearItem, IUserSingle } from "@/lib/types";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { PencilIcon, PlusIcon } from "lucide-react";
 import { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { updateUser } from "../_action/userUpdated";
 import { useRouter } from "next/navigation"
-import { createGear, updateGear } from "../_action/gearCreate";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { updateRental } from "../_action/action";
@@ -36,14 +27,11 @@ export function RentalFormDialogDB({ gear,mode }: GearFormDiallogProps) {
     const [open, setOpen] = useState(false);
 
     const action =  mode === "edit" && gear
-            ? updateRental.bind(null,)
+            ? updateRental.bind(null, gear.id as string)
             : createRental;
         
- 
+     const router  = useRouter()
     const [state, formAction, pending] = useActionState(action, null) as any;
-    
-    const router  = useRouter()
-               
 
     useEffect(() => {
         if (!state) return;
@@ -59,6 +47,7 @@ export function RentalFormDialogDB({ gear,mode }: GearFormDiallogProps) {
             toast.error(state.message || "Something went wrong");
         }
     }, [state]);
+
 
      return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -84,10 +73,10 @@ export function RentalFormDialogDB({ gear,mode }: GearFormDiallogProps) {
                     </DialogTitle>
                 </DialogHeader>
                 <form action={formAction} className="space-y-4">
-                    {gear?.id && mode === "edit" && (
+                    {gear?.id && mode === "create" && (
     <input
       type="hidden"
-      name="gearId"
+      name="gearItemId"
       value={gear.id}
     />
   )}
@@ -106,6 +95,10 @@ export function RentalFormDialogDB({ gear,mode }: GearFormDiallogProps) {
                     <div className="space-y-2">
                         <Label htmlFor="stockQuantity">Quantity</Label>
                         <Input name="stockQuantity" placeholder="Enter number" id="stockQuantity" defaultValue={gear?.stockQuantity}  required />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="price">Price</Label>
+                        <Input readOnly name="price" placeholder="Enter number" id="price" defaultValue={gear?.price}  required />
                     </div>
                         
                     <div className="space-y-2">

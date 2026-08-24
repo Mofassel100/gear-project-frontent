@@ -1,3 +1,4 @@
+import { isAccessTokenExist } from "@/service/refreshToken";
 
 
 
@@ -10,10 +11,22 @@
     }
 */
 export  const getGear = async (
+
 ) => {
-  const res = await fetch(`${process.env.BACKEND_API_URL}/api/gear`);
-console.log(res)
+const accessToken = await isAccessTokenExist()
+  
+
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/gear`,{
+    credentials:"include",
+    headers: {
+      Cookie: `accessToken=${accessToken}`,
+      "Content-Type": "application/json",
+    },
+   
+  });
+
   const result = await res.json();
+ 
   return result;
 };
 

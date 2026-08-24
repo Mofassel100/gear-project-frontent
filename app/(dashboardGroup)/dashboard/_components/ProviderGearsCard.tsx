@@ -10,9 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { ICategory, IGearItem } from "@/lib/types";
+import {  IGearItem } from "@/lib/types";
 
-import Link from "next/link";
 import { GearFormDialogDB } from "./GearDialog";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

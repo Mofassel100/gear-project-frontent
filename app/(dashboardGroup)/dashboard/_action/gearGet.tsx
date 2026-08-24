@@ -18,7 +18,15 @@ type RentaleState = {
 };
 export  const getGearCategory = async (
 ) => {
-  const res = await fetch(`${process.env.BACKEND_API_URL}/api/categories`);
+  const accessToken = await isAccessTokenExist()
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/categories`,{
+    credentials:"include",
+    headers: {
+      Cookie: `accessToken=${accessToken}`,
+      "Content-Type": "application/json",
+    },
+   
+  });
 
   const result = await res.json();
   return result;

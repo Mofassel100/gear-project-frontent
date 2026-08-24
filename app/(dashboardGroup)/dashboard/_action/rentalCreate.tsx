@@ -13,26 +13,34 @@ type RentaleState = {
 };
 
 export const createRental = async (
+
   prevState: RentaleState,
   formData: FormData,
 ) => {
   const user =await getMe()
   const orderNumber = generateOrderId()
-  console.log(Number(formData.get("stockQuantity")))
+ 
   const stockQuantity = Number(formData.get("stockQuantity"));
+  const price = Number(formData.get("price"));
   const rentalStartDate = new Date();
-   
+   const subTotal = stockQuantity * price
+   const deleveryFee = 100 
+   const totalAmount = subTotal + deleveryFee
 
 const rentalEndDate = new Date(rentalStartDate);
 rentalEndDate.setDate(rentalEndDate.getDate() + 3);
-  
+
+  const orderNumberss = `ORD-${orderNumber}`
   const payload = {
-  orderNumber: orderNumber,
+  orderNumber: orderNumberss,
   customerId:user.data.id ,
   stockQuantity:stockQuantity,
-  gearItemId:formData.get("gearId"),
+  gearItemId:formData.get("gearItemId"),
   rentalStartDate:rentalStartDate,
-  rentalEndDate: rentalEndDate
+  rentalEndDate: rentalEndDate,
+  subtotal: subTotal,
+  deliveryFee: deleveryFee,
+  totalAmount: totalAmount
   };
   console.log(payload)
 
@@ -51,7 +59,10 @@ rentalEndDate.setDate(rentalEndDate.getDate() + 3);
   const result = await res.json();
 console.log(result)
 
-  revalidatePath("/dashboard/customer/create-rentals")
+  
+  if(result.success){
+revalidatePath("/dashboard/customer/create-rentals")
+  }
   return result;
 };
 

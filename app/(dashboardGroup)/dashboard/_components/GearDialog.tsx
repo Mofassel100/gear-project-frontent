@@ -15,7 +15,6 @@ import {
 import { PencilIcon, PlusIcon } from "lucide-react";
 import { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { updateUser } from "../_action/userUpdated";
 import { useRouter } from "next/navigation"
 import { createGear, updateGear } from "../_action/gearCreate";
 import { Input } from "@/components/ui/input";
