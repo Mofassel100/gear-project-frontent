@@ -36,16 +36,14 @@ export function RentalFormDialogDB({ gear,mode }: GearFormDiallogProps) {
     const [open, setOpen] = useState(false);
 
     const action =  mode === "edit" && gear
-            ? updateRental.bind(null, gear.id as string)
+            ? updateRental.bind(null,)
             : createRental;
         
-
+ 
     const [state, formAction, pending] = useActionState(action, null) as any;
     
     const router  = useRouter()
-            
-       
-      
+               
 
     useEffect(() => {
         if (!state) return;

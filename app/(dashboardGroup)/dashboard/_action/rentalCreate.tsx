@@ -13,7 +13,6 @@ type RentaleState = {
 };
 
 export const createRental = async (
-  gearId: string,
   prevState: RentaleState,
   formData: FormData,
 ) => {
@@ -31,7 +30,7 @@ rentalEndDate.setDate(rentalEndDate.getDate() + 3);
   orderNumber: orderNumber,
   customerId:user.data.id ,
   stockQuantity:stockQuantity,
-  gearItemId:gearId,
+  gearItemId:formData.get("gearId"),
   rentalStartDate:rentalStartDate,
   rentalEndDate: rentalEndDate
   };
