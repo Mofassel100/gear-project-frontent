@@ -11,13 +11,6 @@ type RentaleState = {
   data: Record<string, any>;
 };
 
-/*
-
-    data : {
-        title
-        conten
-    }
-*/
 export const createRental = async (
   prevState: RentaleState,
   formData: FormData,

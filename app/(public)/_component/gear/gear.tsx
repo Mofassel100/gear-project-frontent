@@ -1,5 +1,4 @@
-import React from 'react'
-import CardImage from '../card'
+
 import { getGear } from '../../_action/gear'
 import CardGearImage from './card'
 import { IGearItem } from '@/lib/types'

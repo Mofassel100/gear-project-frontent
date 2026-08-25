@@ -6,7 +6,6 @@ import { getMe } from "@/service/getMe";
 import { GearCarousel } from "@/components/scroller";
 import CategoryPage from "./(public)/_component/gears/category";
 import GearPage from "./(public)/_component/gear/gear";
-import { CardFooter } from "@/components/ui/card";
 import { SiteFooter } from "@/components/shared/footer";
 import { getGear } from "./(public)/_action/gear";
 

@@ -2,7 +2,6 @@
 import jwt, { JwtPayload } from "jsonwebtoken"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-
 type LoginState = {
     success : true,
     statusCode : number,
@@ -55,7 +54,7 @@ type LoginState = {
 
 //     return result
 // }
-export const loginAction = async (prevState : LoginState , formData: FormData) => {
+export const loginAction = async (redirectTo : string,prevState : LoginState , formData: FormData) => {
 
     const email = formData.get("email");
     const password = formData.get("password");
@@ -90,7 +89,10 @@ export const loginAction = async (prevState : LoginState , formData: FormData) =
             sameSite : "lax",
         });
  const decodedToken = jwt.decode(result.data.accessToken) as JwtPayload;
-
+ 
+  if(redirectTo && typeof redirectTo === "string" && redirectTo.startsWith("/") && !redirectTo.startsWith("/")){
+            redirect(redirectTo)
+        }
         if(decodedToken.role === "Customer"){
             redirect("/dashboard/customer");
         } else if (decodedToken.role === "Admin"){

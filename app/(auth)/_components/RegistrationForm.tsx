@@ -35,7 +35,7 @@ const RegistrationForm = () => {
 
   return (
     <form action={action} className="space-y-4">
-        <Card className="p-5 space-y-4">
+        <Card className="p-5 space-y-4" >
             <Input name="name" type="name" placeholder="Enter Your Full name" required />
             <Input name="email" type="email" placeholder="Enter Your Email" required />
             <Input name="password" type="password" placeholder="Enter Your Password" required />

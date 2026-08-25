@@ -23,6 +23,7 @@ export const createRental = async (
   const stockQuantity = Number(formData.get("stockQuantity"));
   const price = Number(formData.get("price"));
   const rentalStartDate = new Date();
+  rentalStartDate.setDate(rentalStartDate.getDate())
    const subTotal = stockQuantity * price
    const deleveryFee = 100 
    const totalAmount = subTotal + deleveryFee

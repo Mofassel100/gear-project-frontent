@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { ICategory } from "@/lib/types"
+import Image from "next/image";
 import Link from "next/link";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,8 +21,11 @@ export default function CardImage({props}: CardImageProps) {
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
-      <img
+      <Image
         src="/gears/gear1.jpg"
+        alt=""
+  width={500}
+  height={500}
       />
       <CardHeader>
         <CardAction>

@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import {  IGearItem } from "@/lib/types"
+import Image from "next/image";
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -22,16 +23,20 @@ export default function CardGearImage({props}: CardImageGearsProps) {
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
-      <img
-        src={props.picture}
+      <Image
+        src={props?.picture }
+         alt="Gear image"
+  width={500}
+  height={500}
+ className="h-full w-full object-cover"
       />
       <CardHeader className="">
         <CardAction>
-          <Badge variant="secondary">{props.status}</Badge>
+          <Badge variant="secondary">{props?.status}</Badge>
         </CardAction>
-        <CardTitle>{props.name}</CardTitle>
+        <CardTitle>{props?.name}</CardTitle>
         <CardDescription>Price : 
-         {props.price}
+         {props?.price}
         </CardDescription>
        
        
