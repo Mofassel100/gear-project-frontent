@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client"
+/* eslint-disable react-hooks/set-state-in-effect */
 
+"use client"
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
@@ -37,7 +38,7 @@ export function UserFormDialog({ users }: UserFormDiallogProps) {
 
         if (state.success) {
             toast.success(state.message);
-            // eslint-disable-next-line react-hooks/set-state-in-effect -- closing the dialog is the intended reaction to the server action's result, not a render loop
+           
             setOpen(false);
             router.refresh()
         } else {

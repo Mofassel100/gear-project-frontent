@@ -93,7 +93,7 @@ export function GearCarousel() {
           >
             <div className="overflow-hidden rounded-lg bg-muted">
               <Image
-                src={gear.src || "/placeholder.svg"}
+                src={gear.src || "/gears/gear1.jpg"}
                 alt={gear.name}
                 width={600}
                 height={800}

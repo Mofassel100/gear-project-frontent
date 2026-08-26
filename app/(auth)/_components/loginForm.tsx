@@ -14,14 +14,8 @@ const LoginForm = () => {
       const searchParams = useSearchParams();
 const redirectTo = searchParams.get("redirectTo") ?? ""
     const [state, action, pending] = useActionState(loginAction.bind(null,redirectTo), false)
-
-
-
     useEffect(()=> {
         if(!state) return;
-
-      
-
         if(!state.success){
             toast.error(state.message || "Login failed");
             

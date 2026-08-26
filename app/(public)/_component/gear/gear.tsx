@@ -7,20 +7,14 @@ import { IGearItem } from '@/lib/types'
 
 export default async function GearPage() {
  const gear =await getGear()
+
   return (
      <div className="w-full overflow-x-auto">
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center justify-items-center gap-4 p-4">
         {gear?.data?.map((item:IGearItem) => (
           <div
             key={item.id}
-            className="
-              w-[260px]
-              shrink-0
-              sm:w-[280px]
-              md:w-[300px]
-              lg:w-[320px]
-              xl:w-[340px]
-            "
+           
           >
             <CardGearImage props={item} />
           </div>

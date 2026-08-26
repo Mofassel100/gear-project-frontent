@@ -24,14 +24,10 @@ const RegistrationForm = () => {
 
     useEffect(()=> {
         if(!state) return;
-
-      
-
         if(!state.success){
             toast.error(state.message || "Registration  failed");
         }
     }, [state]);
-
 
   return (
     <form action={action} className="space-y-4">

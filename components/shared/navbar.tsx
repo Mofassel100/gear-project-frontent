@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { logout } from "@/service/logout";
-import { LogOut, Settings, User } from "lucide-react";
+import { LogOut, ServerCrashIcon, Settings, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -20,14 +20,12 @@ import { Button } from "@/components/ui/button";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Gear", href: "/gear" },
-  { label: "Services", href: "/services" },
-  { label: "Contact", href: "/contact" },
 ];
 
 // User menu items configuration
 const userMenuItems = [
-  { label: "Profile", icon: User, action: "/customer" },
-  { label: "Settings", icon: Settings, action: "settings" },
+  { label: "Home", icon: User, action: "/" },
+  { label: "Gear", icon: ServerCrashIcon, action: "/gear" },
 ];
 
 type IUser = {
@@ -54,14 +52,15 @@ type IUser = {
 };
 
 type NavbarProps = {
-  user: IUser;
+  user?: IUser;
 };
 
 export function Navbar({ user }: NavbarProps) {
+  
   const router = useRouter();
 
 const dashboardPath = user?.data?.role
-  ? dashboardPaths[user.data.role]
+  ? dashboardPaths[user?.data?.role]
   : undefined;
 
   const handleUserMenuAction = async (action: string) => {
@@ -102,7 +101,7 @@ const dashboardPath = user?.data?.role
           </div>
 
           {/* User Dropdown */}
-          {user.success ? (
+          {user?.success ? (
             <DropdownMenu>
               <DropdownMenuTrigger
                 className="cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -116,9 +115,9 @@ const dashboardPath = user?.data?.role
                 <DropdownMenuGroup>
                   <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col gap-1">
-                      <p className="text-sm font-medium">{user.data?.name}</p>
+                      <p className="text-sm font-medium">{user?.data?.name}</p>
                       <p className="text-xs text-muted-foreground">
-                        {user.data?.email}
+                        {user?.data?.email}
                       </p>
                     </div>
                   </DropdownMenuLabel>

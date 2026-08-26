@@ -95,12 +95,12 @@ export async function proxy(request: NextRequest) {
   }
 
   // Authorization : Role based access control
-  if (pathname.startsWith("/customer") && userRole !== "Customer") {
+  if (pathname.startsWith("/dashboard/customer") && userRole !== "Customer") {
     return NextResponse.redirect(new URL("/not-found", request.url));
-  } else if (pathname.startsWith("/admin-dashboard") && userRole !== "Admin") {
+  } else if (pathname.startsWith("/dashboard/admin") && userRole !== "Admin") {
     return NextResponse.redirect(new URL("/not-found", request.url));
   } else if (
-    pathname.startsWith("/provider-dashboard") &&
+    pathname.startsWith("/dashboard/provider") &&
     userRole !== "Provider"
   ) {
     return NextResponse.redirect(new URL("/not-found", request.url));

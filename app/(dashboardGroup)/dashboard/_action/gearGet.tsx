@@ -18,11 +18,9 @@ type RentaleState = {
 };
 export  const getGearCategory = async (
 ) => {
-  const accessToken = await isAccessTokenExist()
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/categories`,{
     credentials:"include",
-    headers: {
-      Cookie: `accessToken=${accessToken}`,
+    headers: {  
       "Content-Type": "application/json",
     },
    
@@ -36,16 +34,7 @@ export const updateRental = async (
   prevState: RentaleState,
   formData: FormData,
 ) => {
-  console.log({
-    postId,
-  });
-  console.log({
-    title: formData.get("title"),
-    content: formData.get("content"),
-    thumbnail: formData.get("thumbnail"),
-    
-  });
-
+  
   const payload = {
     title: formData.get("title") ?? "",
     content: formData.get("content") ?? "",

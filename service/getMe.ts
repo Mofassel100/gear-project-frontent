@@ -22,7 +22,7 @@ export const getMe = async () => {
       // Authorization : accessToken as unknown as string,
       // Authorization : `${accessToken}`,
       // Authorization : `Bearer ${accessToken}`
-
+      "Content-Type": "application/json",
       Cookie: `accessToken=${accessToken}`,
     },
 
@@ -33,6 +33,5 @@ export const getMe = async () => {
   });
 
   const result = res.json();
-
-  return result;
+  if (result) return result;
 };

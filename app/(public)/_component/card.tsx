@@ -21,12 +21,14 @@ export default function CardImage({props}: CardImageProps) {
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
-      <Image
+     {
+      props ?( <Image
         src="/gears/gear1.jpg"
         alt=""
   width={500}
   height={500}
-      />
+      />):<div>No image available</div>
+     }
       <CardHeader>
         <CardAction>
           <Badge variant="secondary">{props.status}</Badge>

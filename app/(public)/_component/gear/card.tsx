@@ -20,16 +20,25 @@ interface CardImageGearsProps {
   props: IGearItem;
 }
 export default function CardGearImage({props}: CardImageGearsProps) {
+
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
-      <Image
+      {
+        props?.picture ? (<Image
         src={props?.picture }
          alt="Gear image"
   width={500}
   height={500}
  className="h-full w-full object-cover"
-      />
+      />): (<Image
+        src="/gears/gear1.jpg"
+         alt="Gear image"
+  width={500}
+  height={500}
+ className="h-full w-full object-cover"
+      />)
+      }
       <CardHeader className="">
         <CardAction>
           <Badge variant="secondary">{props?.status}</Badge>

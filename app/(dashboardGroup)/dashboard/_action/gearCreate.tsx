@@ -12,20 +12,11 @@ type GearState = {
   data: Record<string, any>;
 };
 
-/*
-
-    data : {
-        title
-        conten
-    }
-*/
 export const createGear = async (
   prevState: GearState,
   formData: FormData,
 ) => {
   const user= await getMe()
-  console.log(user)
-// console.log(user, formData.get("name"),formData.get("brand"),formData.get("model"),formData.get("condition"), formData.get("categoryId"),formData.get("description"))
   const payload = {
     name: formData.get("name"),
     brand: formData.get("brand"),
@@ -35,16 +26,10 @@ export const createGear = async (
     description: formData.get("description"),
     userId: user.data.id
   };
-console.log(payload)
   const accessToken = await isAccessTokenExist()
-
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/provider/gear`, {
     method: "POST",
     headers: {
-      // Authorization : accessToken as unknown as string,
-      // Authorization : `${accessToken}`,
-      // Authorization : `Bearer ${accessToken}`
-
       Cookie: `accessToken=${accessToken}`,
       "Content-Type": "application/json",
     },
@@ -60,7 +45,6 @@ export const updateGear = async (
   prevState: GearState,
   formData: FormData,
 ) => {
-  console.log(gearId,"gearId", formData.get("gearId"))
   const payload = {  
       name:formData.get("name"),
       brand: formData.get("brand"),
@@ -121,10 +105,6 @@ export const getMyRentals = async () => {
 
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/rentals`, {
     headers: {
-      // Authorization : accessToken as unknown as string,
-      // Authorization : `${accessToken}`,
-      // Authorization : `Bearer ${accessToken}`
-
       Cookie: `accessToken=${accessToken}`,
     },
 

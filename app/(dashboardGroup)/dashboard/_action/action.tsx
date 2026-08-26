@@ -15,13 +15,6 @@ export const createRental = async (
   prevState: RentaleState,
   formData: FormData,
 ) => {
-  console.log({
-    title: formData.get("title"),
-    content: formData.get("content"),
-    thumbnail: formData.get("thumbnail"),
-    tags: (formData.get("tags") as string).split(", "),
-    isPremium: formData.get("isPremium") === "on",
-  });
 
   const payload = {
     title: formData.get("title"),
@@ -64,11 +57,6 @@ export const updateRental = async (
   prevState: RentaleState,
   formData: FormData,
 ) => {
-  console.log({
-    postId,
-  });
-  
-
   const payload = {
     title: formData.get("title") ?? "",
     content: formData.get("content") ?? "",
@@ -111,7 +99,6 @@ export const updateRental = async (
 
 export const getMyRentals = async () => {
   const cookieStore = await cookies();
-
   const accessToken = cookieStore.get("accessToken")?.value || null;
 
   if (!accessToken) {

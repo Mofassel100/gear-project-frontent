@@ -43,8 +43,6 @@ rentalEndDate.setDate(rentalEndDate.getDate() + 3);
   deliveryFee: deleveryFee,
   totalAmount: totalAmount
   };
-  console.log(payload)
-
   const accessToken = await isAccessTokenExist()
 
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/rentals`, {
@@ -57,10 +55,7 @@ rentalEndDate.setDate(rentalEndDate.getDate() + 3);
     body: JSON.stringify(payload),
   });
 
-  const result = await res.json();
-console.log(result)
-
-  
+  const result = await res.json();  
   if(result.success){
 revalidatePath("/dashboard/customer/create-rentals")
   }

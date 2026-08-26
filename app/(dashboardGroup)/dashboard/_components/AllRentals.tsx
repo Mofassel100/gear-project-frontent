@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/table"
 import { allRentalsFromDB } from "../_action/allRentals"
 import { IRentalOrder } from "@/lib/types"
+import { Button } from "@/components/ui/button"
+import { PaymentFormDialogDB } from "./payment"
 
 
 export async function RentalTableDemo() {
@@ -23,6 +25,7 @@ export async function RentalTableDemo() {
           <TableHead className="w-[100px]">Order Number</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Total Amount</TableHead>
+          <TableHead>Payment</TableHead>
           
         </TableRow>
       </TableHeader>
@@ -31,8 +34,10 @@ export async function RentalTableDemo() {
           <TableRow key={rentals.id}>
 
             <TableCell className="font-medium">{rentals.orderNumber}</TableCell>
-            <TableCell className="font-medium">{rentals.orderStatus}</TableCell>
+            <TableCell className="font-medium">{rentals.paymentStatus}</TableCell>
             <TableCell className="font-medium">{rentals.totalAmount}</TableCell>
+            <TableCell className="font-medium">{rentals.paymentStatus == 
+            "PENDING" ?  <TableCell className="font-medium"><PaymentFormDialogDB mode="create" rentals={rentals}></PaymentFormDialogDB></TableCell>:  <TableCell className="font-medium">Paid</TableCell> }</TableCell>
             {/* <TableCell>{rentals.rentalStartDate}</TableCell>
             <TableCell>{rentals.rentalEndDate}</TableCell> */}
             {/* <TableCell className="text-right"> <CardAction>
