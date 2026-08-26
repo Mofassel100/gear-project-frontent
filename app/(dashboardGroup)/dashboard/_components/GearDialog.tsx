@@ -167,7 +167,7 @@ export function GearFormDialogDB({ category,user,gear,mode }: GearFormDiallogPro
                         <Input defaultValue={gear?.brand} id="brand" name="brand" placeholder="Enter Gear Brand" required />
                     </div>
                      <div className="space-y-2">
-                        <Label htmlFor="brand">Price</Label>
+                        <Label htmlFor="price">Price</Label>
                         <Input defaultValue={gear?.price} id="price" type="number" name="price" placeholder="Enter Gear price" required />
                     </div>
                       <div className="space-y-2">
