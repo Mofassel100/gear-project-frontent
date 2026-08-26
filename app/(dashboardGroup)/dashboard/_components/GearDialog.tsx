@@ -29,7 +29,7 @@ type GearFormDiallogProps = {
 }
 
 export function GearFormDialogDB({ category,user,gear,mode }: GearFormDiallogProps) {
-
+console.log(category)
     const [open, setOpen] = useState(false);
 
     const action =  mode === "edit" && gear
